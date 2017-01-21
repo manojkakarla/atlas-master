@@ -1,0 +1,33 @@
+httpClient:
+  socketTimeout: 15000
+  connectTimeout: 15000
+  maxConnPerRoute: 1024
+  maxConnTotal: 1024
+
+server:
+ type: default
+ maxThreads: 1024
+ minThreads: 8
+ requestLog:
+  appenders: []
+ applicationConnectors:
+    - type: http
+      port: 9090
+ adminConnectors:
+    - type: http
+      port: 9091
+
+# Logging settings.
+logging:
+  level: INFO
+
+  loggers:
+    com.atlas.infrastructure: INFO
+  appenders:
+    - type: console
+
+    - type: file
+      threshold: INFO
+      currentLogFilename: logs/scheduler.log
+      archivedLogFilenamePattern: logs/scheduler-%d{yyyy-MM-dd}.log.gz
+      archivedFileCount: 5
